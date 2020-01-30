@@ -44,11 +44,50 @@ namespace SalesDepart
                 Console.WriteLine("Connection Error");
                 throw new Exception("Connection Fail");
             }
-
-            string commandText = "USE MASTER; CREATE DATABASE @DatabaseName;";
-            DbCommand command = _factory.CreateCommand(commandText,newconnection);
+            // With dbname not working
+            string commandText = "USE MASTER; CREATE DATABASE Sales;";
+            DbCommand command = _factory.CreateCommand(commandText, newconnection);
             command.AddParameter("DatabaseName", dbname);
             command.ExecuteNonQuery();
+
+        }
+        public void DropDB(string dbname)
+        {
+            DbConnection newconnection = _factory.CreateConnection(_connectionString);
+            newconnection.Open();
+            if (newconnection.State != ConnectionState.Open)
+            {
+                Console.WriteLine("Connection Error");
+                throw new Exception("Connection Fail");
+            }
+            // With dbname not working
+            string commandText = "USE MASTER; DROP DATABASE Sales;";
+            DbCommand command = _factory.CreateCommand(commandText, newconnection);
+            command.AddParameter("DatabaseName", dbname);
+            command.ExecuteNonQuery();
+        }
+
+        public void CreateTable()
+        {
+            string commandText = @" USE Sales; 
+                                    CREATE TABLE Customers
+                                        (
+                                        ID int,
+                                        Name nvarchar(50),
+                                        Surname nvarchar(50)
+                                        )";
+
+            DbConnection newconnection = _factory.CreateConnection(_connectionString);
+            newconnection.Open();
+            if (newconnection.State != ConnectionState.Open)
+            {
+                Console.WriteLine("Connection Error");
+                throw new Exception("Connection Fail");
+            }
+            using (DbCommand command = _factory.CreateCommand(commandText, newconnection))
+            {
+                command.ExecuteNonQuery();
+            }
 
         }
         public void Dispose()
