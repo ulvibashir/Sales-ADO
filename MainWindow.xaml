@@ -13,33 +13,8 @@
         </Grid.RowDefinitions>
 
         <ComboBox Name="combo" Height="50" FontFamily="Comic Sans MS" FontSize="26" HorizontalContentAlignment="Center" SelectionChanged="combolist_SelectionChanged"></ComboBox>
-        <ListBox Grid.Row="1" x:Name="combolist">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel></StackPanel>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
+        <DataGrid Grid.Row="1" x:Name="combolist">
             
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock x:Name="Temptext" FontSize="23">
-                            <Run Text="{Binding ID}"/>
-                            <Run Text="   "/>
-                            <Run Text="{Binding Name}"/>
-                            <Run Text="   "/>
-                            <Run Text="{Binding Surname}"/>
-                            <Run Text="   "/>
-                            <Run Text="{Binding SellerID}"/>
-                            <Run Text="   "/>
-                            <Run Text="{Binding CustomerID}"/>
-                            <Run Text="   "/>
-                            <Run Text="{Binding Price}"/>
-                            <Run Text="   "/>
-                            <Run Text="{Binding dateTime}"/>
-                    </TextBlock>
-                </DataTemplate>
-                
-            </ListBox.ItemTemplate>
-        </ListBox>
+        </DataGrid>
     </Grid>
 </Window>
